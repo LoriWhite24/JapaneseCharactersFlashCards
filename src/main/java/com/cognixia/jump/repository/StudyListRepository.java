@@ -9,5 +9,6 @@ import com.cognixia.jump.model.StudyList;
 
 @Repository
 public interface StudyListRepository extends JpaRepository<StudyList, Long>{
+	List<StudyList> findAll();
 	List<StudyList> findByNameContaining(String name);
 }

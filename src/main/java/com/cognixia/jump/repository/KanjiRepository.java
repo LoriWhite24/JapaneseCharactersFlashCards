@@ -9,6 +9,7 @@ import com.cognixia.jump.model.Kanji;
 
 @Repository
 public interface KanjiRepository extends JpaRepository<Kanji, Long>{
+	List<Kanji> findAll();
 	List<Kanji> findByCharacterContaining(String character);
 	List<Kanji> findByjlptLevelContaining(String jlptLevel);
 	List<Kanji> findByGradeContaining(String grade);
