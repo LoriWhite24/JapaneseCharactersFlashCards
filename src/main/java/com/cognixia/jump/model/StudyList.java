@@ -18,10 +18,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-@Entity 
-@Table(name = "studylist")
-public class StudyList implements Serializable{
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Entity 
+@Table(name = "studylists")
+public class StudyList implements Serializable{
+	@Autowired
 	private static final long serialVersionUID = 2383519086789330186L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +31,12 @@ public class StudyList implements Serializable{
 	@NotBlank
 	@Column(unique = true)
 	private String name;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "studylists_syllabaries", joinColumns = {@JoinColumn(name = "syllabary_id", referencedColumnName = "id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
 	private Set<JapaneseSyllabary> syllabaries = new HashSet<JapaneseSyllabary>();
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "studylists_kanji", joinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)},
+    @JoinTable(name = "studylists_kanjis", joinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
 	private Set<Kanji> kanjis = new HashSet<Kanji>();
 	

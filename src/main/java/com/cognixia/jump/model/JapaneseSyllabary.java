@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,24 +19,28 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-enum SyllabaryType {
-	HIRAGANA, KATAKANA;
-}
-
-enum SyllabogramType {
-	MONOGRAPHS, DIAGRAPHS, DIACRITICS, DIAGRAPHS_WITH_DIACRITICS;
-}
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "syllabaries")
 public class JapaneseSyllabary implements Serializable{
 	
+	public enum SyllabaryType {
+		HIRAGANA, KATAKANA;
+	}
+
+	public enum SyllabogramType {
+		MONOGRAPHS, DIAGRAPHS, DIACRITICS, DIAGRAPHS_WITH_DIACRITICS;
+	}
+	
+	@Autowired
 	private static final long serialVersionUID = 3073455385620779001L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
+	@Column(name = "character_value", unique = true)
 	private String character;
 	@NotBlank
 	private String reading;
@@ -47,8 +53,8 @@ public class JapaneseSyllabary implements Serializable{
 	@NotNull
 	private String strokeOrder; //the a link to a gif of the stroke order
 	@NotBlank
-	private int numOfStrokes;
-	@ManyToMany(mappedBy = "syllabaries", fetch = FetchType.LAZY)
+	private Integer numOfStrokes;
+	@ManyToMany(mappedBy = "syllabaries", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
 	
@@ -56,7 +62,7 @@ public class JapaneseSyllabary implements Serializable{
 		this("該当なし", "N/A", SyllabaryType.HIRAGANA, SyllabogramType.MONOGRAPHS, "N/A", -1);
 	}
 
-	public JapaneseSyllabary(String character, String romanji, SyllabaryType type, SyllabogramType syllabogram, String strokeOrderImg, int strokes) {
+	public JapaneseSyllabary(String character, String romanji, SyllabaryType type, SyllabogramType syllabogram, String strokeOrderImg, Integer strokes) {
 		super();
 		this.character = character;
 		this.reading = romanji;
@@ -118,11 +124,11 @@ public class JapaneseSyllabary implements Serializable{
 		this.strokeOrder = strokeOrder;
 	}
 
-	public int getNumOfStrokes() {
+	public Integer getNumOfStrokes() {
 		return numOfStrokes;
 	}
 
-	public void setNumOfStrokes(int numOfStrokes) {
+	public void setNumOfStrokes(Integer numOfStrokes) {
 		this.numOfStrokes = numOfStrokes;
 	}
 

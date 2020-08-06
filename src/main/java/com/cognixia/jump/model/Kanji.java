@@ -5,12 +5,12 @@ package com.cognixia.jump.model;
 //import java.io.IOException;
 //import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,10 +22,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "kanji")
-public class Kanji implements Serializable{
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Entity
+@Table(name = "kanjis")
+public class Kanji implements Serializable{
+	@Autowired
 	private static final long serialVersionUID = -349817696637165461L;
 //	private static final List<JapaneseSyllabary> SYLLABARIES = new ArrayList<JapaneseSyllabary>();
 //	
@@ -51,28 +53,29 @@ public class Kanji implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
+	@Column(name = "character_value", unique = true)
 	private String character;
 	private String jlptLevel;
 	private String grade;
 	@NotNull
 	private String strokeOrder;
 	@NotBlank
-	private int numOfStrokes;
-	private int frequency;
+	private Integer numOfStrokes;
+	private Integer frequency;
 	@NotEmpty
-	private List<String> meaning = new ArrayList<String>();
+	private String meaning;
 	@NotEmpty
-	private List<String> kunyomi = new ArrayList<String>();
+	private String kunyomi;
 	@NotEmpty
-	private List<String> onyomi = new ArrayList<String>();
-	@ManyToMany(mappedBy = "kanji", fetch = FetchType.LAZY)
+	private String onyomi;
+	@ManyToMany(mappedBy = "kanjis", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
 	public Kanji() {
-		this("該当なし", "N/A", "N/A", "N/A", -1, -1, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
+		this("該当なし", "N/A", "N/A", "N/A", -1, -1, "N/A", "N/A", "N/A");
 	}
 
-	public Kanji(String character, String jlptLevel, String grade, String strokes, int numOfStrokes, int frequency, List<String> meaning, List<String> kunyomi, List<String> onyomi) {
+	public Kanji(String character, String jlptLevel, String grade, String strokes, Integer numOfStrokes, Integer frequency, String meaning, String kunyomi, String onyomi) {
 		super();
 		this.character = character;
 		this.jlptLevel = jlptLevel;
@@ -129,43 +132,43 @@ public class Kanji implements Serializable{
 		this.strokeOrder = strokeOrder;
 	}
 
-	public int getNumOfStrokes() {
+	public Integer getNumOfStrokes() {
 		return numOfStrokes;
 	}
 
-	public void setNumOfStrokes(int numOfStrokes) {
+	public void setNumOfStrokes(Integer numOfStrokes) {
 		this.numOfStrokes = numOfStrokes;
 	}
 
-	public int getFrequency() {
+	public Integer getFrequency() {
 		return frequency;
 	}
 
-	public void setFrequency(int frequency) {
+	public void setFrequency(Integer frequency) {
 		this.frequency = frequency;
 	}
 
-	public List<String> getMeaning() {
+	public String getMeaning() {
 		return meaning;
 	}
 
-	public void setMeaning(List<String> meaning) {
+	public void setMeaning(String meaning) {
 		this.meaning = meaning;
 	}
 
-	public List<String> getKunyomi() {
+	public String getKunyomi() {
 		return kunyomi;
 	}
 
-	public void setKunyomi(List<String> kunyomi) {
+	public void setKunyomi(String kunyomi) {
 		this.kunyomi = kunyomi;
 	}
 
-	public List<String> getOnyomi() {
+	public String getOnyomi() {
 		return onyomi;
 	}
 
-	public void setOnyomi(List<String> onyomi) {
+	public void setOnyomi(String onyomi) {
 		this.onyomi = onyomi;
 	}
 
