@@ -6,12 +6,16 @@ package com.cognixia.jump.model;
 //import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -60,6 +64,8 @@ public class Kanji implements Serializable{
 	private List<String> kunyomi = new ArrayList<String>();
 	@NotEmpty
 	private List<String> onyomi = new ArrayList<String>();
+	@ManyToMany(mappedBy = "kanji", fetch = FetchType.LAZY)
+    private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
 	public Kanji() {
 		this("該当なし", "N/A", "N/A", "N/A", -1, -1, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
@@ -160,6 +166,14 @@ public class Kanji implements Serializable{
 
 	public void setOnyomi(List<String> onyomi) {
 		this.onyomi = onyomi;
+	}
+
+	public Set<StudyList> getStudyLists() {
+		return studyLists;
+	}
+
+	public void setStudyLists(Set<StudyList> studyLists) {
+		this.studyLists = studyLists;
 	}
 
 	@Override

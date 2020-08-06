@@ -5,41 +5,46 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-//import javax.persistence.CascadeType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-//import javax.persistence.FetchType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity 
+@Table(name = "studylist")
 public class StudyList implements Serializable{
 
 	private static final long serialVersionUID = 2383519086789330186L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "studyList_id", unique = true, nullable = false)
 	private Long id;
 	@NotBlank
 	@Column(unique = true)
 	private String name;
-//	@OneToMany(mappedBy = "syllabary", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//	private Set<JapaneseSyllabary> syllabaries = new HashSet<JapaneseSyllabary>();
-//	@OneToMany(mappedBy = "kanji", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//	private Set<Kanji> kanjis = new HashSet<Kanji>();
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "studylists_syllabaries", joinColumns = {@JoinColumn(name = "syllabary_id", referencedColumnName = "id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
+	private Set<JapaneseSyllabary> syllabaries = new HashSet<JapaneseSyllabary>();
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "studylists_kanji", joinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
+	private Set<Kanji> kanjis = new HashSet<Kanji>();
 	
 	public StudyList() {
-		this("N/A", new HashSet<JapaneseSyllabary>(), new HashSet<Kanji>());
+		this("N/A");
 	}
 	
-	public StudyList(String name, Set<JapaneseSyllabary> syllabaries, Set<Kanji> kanjis) {
+	public StudyList(String name) {
 		super();
 		this.name = name;
-//		this.syllabaries = syllabaries;
-//		this.kanjis = kanjis;
 	}
 
 	public Long getId() {
@@ -58,21 +63,21 @@ public class StudyList implements Serializable{
 		this.name = name;
 	}
 
-//	public Set<JapaneseSyllabary> getSyllabaries() {
-//		return syllabaries;
-//	}
-//
-//	public void setSyllabaries(Set<JapaneseSyllabary> syllabaries) {
-//		this.syllabaries = syllabaries;
-//	}
-//
-//	public Set<Kanji> getKanjis() {
-//		return kanjis;
-//	}
-//
-//	public void setKanjis(Set<Kanji> kanjis) {
-//		this.kanjis = kanjis;
-//	}
+	public Set<JapaneseSyllabary> getSyllabaries() {
+		return syllabaries;
+	}
+
+	public void setSyllabaries(Set<JapaneseSyllabary> syllabaries) {
+		this.syllabaries = syllabaries;
+	}
+
+	public Set<Kanji> getKanjis() {
+		return kanjis;
+	}
+
+	public void setKanjis(Set<Kanji> kanjis) {
+		this.kanjis = kanjis;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -81,7 +86,7 @@ public class StudyList implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "StudyList [id=" + id + ", name=" + name + /*", syllabaries=" + syllabaries + ", kanjis=" + kanjis + */"]";
+		return "StudyList [id=" + id + ", name=" + name + ", syllabaries=" + syllabaries + ", kanjis=" + kanjis + "]";
 	}
 
 	@Override

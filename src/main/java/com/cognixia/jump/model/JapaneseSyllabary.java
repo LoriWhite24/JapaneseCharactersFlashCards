@@ -1,13 +1,17 @@
 package com.cognixia.jump.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -43,6 +47,8 @@ public class JapaneseSyllabary implements Serializable{
 	private String strokeOrder; //the a link to a gif of the stroke order
 	@NotBlank
 	private int numOfStrokes;
+	@ManyToMany(mappedBy = "syllabaries", fetch = FetchType.LAZY)
+    private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
 	
 	public JapaneseSyllabary() {
@@ -117,6 +123,14 @@ public class JapaneseSyllabary implements Serializable{
 
 	public void setNumOfStrokes(int numOfStrokes) {
 		this.numOfStrokes = numOfStrokes;
+	}
+
+	public Set<StudyList> getStudyLists() {
+		return studyLists;
+	}
+
+	public void setStudyLists(Set<StudyList> studyLists) {
+		this.studyLists = studyLists;
 	}
 
 	@Override
