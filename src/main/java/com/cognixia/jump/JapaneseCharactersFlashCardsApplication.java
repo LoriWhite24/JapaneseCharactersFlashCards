@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import com.cognixia.jump.repository.JapaneseSyllabaryRepository;
 
 @SpringBootApplication
 public class JapaneseCharactersFlashCardsApplication {
-
+	@Autowired
 	private JapaneseSyllabaryRepository japaneseSyllabaryRepository;
 	
 	public static void main(String[] args) {
@@ -51,7 +52,7 @@ public class JapaneseCharactersFlashCardsApplication {
 								gram = SyllabogramType.DIAGRAPHS;
 							case "diacritics":
 								gram = SyllabogramType.DIACRITICS;
-							case "diagraphs_with_diacritics":
+							case "diagraphs with diacritics":
 								gram = SyllabogramType.DIAGRAPHS_WITH_DIACRITICS;
 						 }
 						 japaneseSyllabaryRepository.save(new JapaneseSyllabary(tokens[0], tokens[1], type, gram, tokens[3], Integer.parseInt(tokens[4])));

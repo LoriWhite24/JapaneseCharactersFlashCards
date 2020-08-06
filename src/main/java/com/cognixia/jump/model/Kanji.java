@@ -19,36 +19,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "kanjis")
 public class Kanji implements Serializable{
 
 	private static final long serialVersionUID = -349817696637165461L;
-//	private static final List<JapaneseSyllabary> SYLLABARIES = new ArrayList<JapaneseSyllabary>();
-//	
-//	static {
-//		BufferedReader br;
-//		String[] files = {"hiragana", "katakana"};
-//		for(int i = 0; i < files.length; i++) {
-//			try {
-//				br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/static/" + files[i] + ".csv"), "UTF-8"));
-//				String line;
-//				String[] tokens;
-//				while((line = br.readLine()) != null) {
-//					 tokens = line.trim().split(",");
-//					 SYLLABARIES.add(new JapaneseSyllabary(tokens[0], tokens[1], files[i], tokens[2], tokens[3], Integer.parseInt(tokens[4])));
-//				}
-//				br.close();
-//			} catch(IOException e) {
-//				System.out.println("Failed to read in " + files[i] + ".");
-//			}
-//		}
-//	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -59,14 +36,14 @@ public class Kanji implements Serializable{
 	private String grade;
 	@NotNull
 	private String strokeOrder;
-	@NotBlank
+	@NotNull
 	private Integer numOfStrokes;
 	private Integer frequency;
-	@NotEmpty
+	@NotBlank
 	private String meaning;
-	@NotEmpty
+	@NotBlank
 	private String kunyomi;
-	@NotEmpty
+	@NotBlank
 	private String onyomi;
 	@ManyToMany(mappedBy = "kanjis", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
@@ -200,9 +177,4 @@ public class Kanji implements Serializable{
     public int hashCode() {
         return Objects.hash(id);
     }
-	
-//	public static List<JapaneseSyllabary> getSyllabaries() {
-//		return SYLLABARIES;
-//	}
-
 }

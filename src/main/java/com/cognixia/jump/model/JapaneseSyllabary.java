@@ -19,8 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Entity
 @Table(name = "syllabaries")
 public class JapaneseSyllabary implements Serializable{
@@ -39,19 +37,19 @@ public class JapaneseSyllabary implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(name = "character_value", unique = true)
+	@Column(name = "character_value")
 	private String character;
 	@NotBlank
 	private String reading;
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private SyllabaryType type;
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private SyllabogramType syllabogram;
 	@NotNull
 	private String strokeOrder; //the a link to a gif of the stroke order
-	@NotBlank
+	@NotNull
 	private Integer numOfStrokes;
 	@ManyToMany(mappedBy = "syllabaries", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
