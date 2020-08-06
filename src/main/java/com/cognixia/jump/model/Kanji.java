@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -183,6 +184,20 @@ public class Kanji implements Serializable{
 				+ ", meaning=" + meaning + ", kunyomi=" + kunyomi + ", onyomi=" + onyomi + "]";
 	}
 
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (id == null || obj == null || getClass() != obj.getClass())
+            return false;
+        Kanji toCompare = (Kanji) obj;
+        return id.equals(toCompare.id);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+	
 //	public static List<JapaneseSyllabary> getSyllabaries() {
 //		return SYLLABARIES;
 //	}
