@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity 
 @Table(name = "studylists")
 public class StudyList implements Serializable{
-	@Autowired
+
 	private static final long serialVersionUID = 2383519086789330186L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

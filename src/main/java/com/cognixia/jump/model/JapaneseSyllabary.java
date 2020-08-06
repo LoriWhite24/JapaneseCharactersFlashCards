@@ -33,7 +33,6 @@ public class JapaneseSyllabary implements Serializable{
 		MONOGRAPHS, DIAGRAPHS, DIACRITICS, DIAGRAPHS_WITH_DIACRITICS;
 	}
 	
-	@Autowired
 	private static final long serialVersionUID = 3073455385620779001L;
 	
 	@Id

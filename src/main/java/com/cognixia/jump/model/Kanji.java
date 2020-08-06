@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity
 @Table(name = "kanjis")
 public class Kanji implements Serializable{
-	@Autowired
+
 	private static final long serialVersionUID = -349817696637165461L;
 //	private static final List<JapaneseSyllabary> SYLLABARIES = new ArrayList<JapaneseSyllabary>();
 //	
