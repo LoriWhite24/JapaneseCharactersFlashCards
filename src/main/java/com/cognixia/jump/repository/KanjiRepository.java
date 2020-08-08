@@ -13,7 +13,8 @@ public interface KanjiRepository extends JpaRepository<Kanji, Long>{
 	List<Kanji> findByCharacterContaining(String character);
 	List<Kanji> findByjlptLevelContaining(String jlptLevel);
 	List<Kanji> findByGradeContaining(String grade);
-	List<Kanji> findByNumOfStrokesContaining(int numOfStrokes);
+	List<Kanji> findByNumOfStrokesContaining(Integer numOfStrokes);
+	List<Kanji> findByFrequencyContaining(Integer frequency);
 	List<Kanji> findByMeaningContaining(String meaning);
 	List<Kanji> findByKunyomiContaining(String kunyomi);
 	List<Kanji> findByOnyomiContaining(String onyomi);

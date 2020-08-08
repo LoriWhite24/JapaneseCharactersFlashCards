@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +26,15 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "kanjis")
 public class Kanji implements Serializable{
-
+	
+	public enum JLPTLevel {
+		JLPT_N1, JLPT_N2, JLPT_N3, JLPT_N4, JLPT_N5; 
+	}
+	
+	public enum Grade {
+		Grade_1, Grade_2, Grade_3, Grade_4, Grade_5, Grade_6, Grade_S, USED_IN_NAMES;
+	}
+	
 	private static final long serialVersionUID = -349817696637165461L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +42,10 @@ public class Kanji implements Serializable{
 	@NotBlank
 	@Column(name = "character_value", unique = true)
 	private String character;
-	private String jlptLevel;
-	private String grade;
+	@Enumerated(EnumType.STRING)
+	private JLPTLevel jlptLevel;
+	@Enumerated(EnumType.STRING)
+	private Grade grade;
 	@NotNull
 	private String strokeOrder;
 	@NotNull
@@ -49,10 +61,10 @@ public class Kanji implements Serializable{
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
 	public Kanji() {
-		this("該当なし", "N/A", "N/A", "N/A", -1, -1, "N/A", "N/A", "N/A");
+		this("該当なし", JLPTLevel.JLPT_N1, Grade.Grade_1, "N/A", -1, -1, "N/A", "N/A", "N/A");
 	}
 
-	public Kanji(String character, String jlptLevel, String grade, String strokes, Integer numOfStrokes, Integer frequency, String meaning, String kunyomi, String onyomi) {
+	public Kanji(String character, JLPTLevel jlptLevel, Grade grade, String strokes, Integer numOfStrokes, Integer frequency, String meaning, String kunyomi, String onyomi) {
 		super();
 		this.character = character;
 		this.jlptLevel = jlptLevel;
@@ -85,19 +97,19 @@ public class Kanji implements Serializable{
 		this.character = character;
 	}
 
-	public String getJlptLevel() {
+	public JLPTLevel getJlptLevel() {
 		return jlptLevel;
 	}
 
-	public void setJlptLevel(String jlptLevel) {
+	public void setJlptLevel(JLPTLevel jlptLevel) {
 		this.jlptLevel = jlptLevel;
 	}
 
-	public String getGrade() {
+	public Grade getGrade() {
 		return grade;
 	}
 
-	public void setGrade(String grade) {
+	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
 
