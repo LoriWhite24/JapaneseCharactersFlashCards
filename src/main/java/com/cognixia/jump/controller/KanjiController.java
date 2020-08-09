@@ -80,12 +80,12 @@ public class KanjiController {
 	}
 	
 	@GetMapping("/kanjis/meaning/{meaning}")
-	public List<Kanji> getSyllabariesByMeaning(@PathVariable String meaning) {
+	public List<Kanji> getKanjiByMeaning(@PathVariable String meaning) {
 		return service.findByMeaningContaining(meaning);
 	}
 	
 	@GetMapping("/kanjis/character/{character}")
-	public Kanji getSyllabariesByType(@PathVariable String character) {
+	public Kanji getKanjiByCharacter(@PathVariable String character) {
 		return service.findByCharacter(character);
 	}
 }
