@@ -30,12 +30,12 @@ public class StudyList implements Serializable{
 	@Column(unique = true)
 	private String name;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "studylists_syllabaries", joinColumns = {@JoinColumn(name = "syllabary_id", referencedColumnName = "id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
+    @JoinTable(name = "studylists_syllabaries", joinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "syllabary_id", referencedColumnName = "id", nullable = false, updatable = false)})
 	private Set<JapaneseSyllabary> syllabaries = new HashSet<JapaneseSyllabary>();
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "studylists_kanjis", joinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)})
+    @JoinTable(name = "studylists_kanjis", joinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)})
 	private Set<Kanji> kanjis = new HashSet<Kanji>();
 	
 	public StudyList() {

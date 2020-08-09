@@ -56,5 +56,5 @@ public class StudyListController {
 //	
 //	@PostMapping("/add/studylist")
 //	
-//	@DeleteMapping("/delete/studylist")
+//	@DeleteMapping("/delete/studylist/{id}")
 }
