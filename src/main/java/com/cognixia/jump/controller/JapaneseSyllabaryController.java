@@ -62,6 +62,6 @@ public class JapaneseSyllabaryController {
 	
 	@GetMapping("/japanese_syllabaries/character/{character}")
 	public JapaneseSyllabary getSyllabariesByType(@PathVariable String character) {
-		return service.findByCharacterContaining(character);
+		return service.findByCharacter(character);
 	}
 }

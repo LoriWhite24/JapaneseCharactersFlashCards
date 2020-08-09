@@ -12,7 +12,7 @@ import com.cognixia.jump.model.JapaneseSyllabary.SyllabogramType;
 @Repository
 public interface JapaneseSyllabaryRepository extends JpaRepository<JapaneseSyllabary, Long>{
 	List<JapaneseSyllabary> findAll();
-	JapaneseSyllabary findByCharacterContaining(String character);
+	JapaneseSyllabary findByCharacter(String character);
 	List<JapaneseSyllabary> findByReadingContaining(String reading);
 	List<JapaneseSyllabary> findByTypeContaining(SyllabaryType type);
 	List<JapaneseSyllabary> findBySyllabogramContaining(SyllabogramType syllabogram);
