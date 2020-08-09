@@ -18,8 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Entity 
 @Table(name = "studylists")
 public class StudyList implements Serializable{
