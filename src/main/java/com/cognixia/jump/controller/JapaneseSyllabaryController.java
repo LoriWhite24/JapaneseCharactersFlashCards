@@ -26,7 +26,7 @@ public class JapaneseSyllabaryController {
 	}
 	
 	@GetMapping("/japanese_syllabaries/type/{type}")
-	public List<JapaneseSyllabary> getType(@PathVariable String type) {
+	public List<JapaneseSyllabary> getJapaneseSyllabariesByType(@PathVariable String type) {
 		switch(type) {
 		case "hiragana": 
 			return service.findByTypeContaining(SyllabaryType.HIRAGANA);
@@ -39,7 +39,7 @@ public class JapaneseSyllabaryController {
 	}
 	
 	@GetMapping("/japanese_syllabaries/syllabogram/{syllabogram}")
-	public List<JapaneseSyllabary> getSyllabogram(@PathVariable String syllabogram) {
+	public List<JapaneseSyllabary> getJapaneseSyllabariesBySyllabogram(@PathVariable String syllabogram) {
 		switch(syllabogram) {
 		case "monographs": 
 			return service.findBySyllabogramContaining(SyllabogramType.MONOGRAPHS);
@@ -56,12 +56,12 @@ public class JapaneseSyllabaryController {
 	}
 	
 	@GetMapping("/japanese_syllabaries/reading/{read}")
-	public List<JapaneseSyllabary> getSyllabariesByReading(@PathVariable String read) {
+	public List<JapaneseSyllabary> getJapaneseSyllabariesByReading(@PathVariable String read) {
 		return service.findByReadingContaining(read);
 	}
 	
 	@GetMapping("/japanese_syllabaries/character/{character}")
-	public JapaneseSyllabary getSyllabariesByType(@PathVariable String character) {
+	public JapaneseSyllabary getJapaneseSyllabaryByCharacter(@PathVariable String character) {
 		return service.findByCharacter(character);
 	}
 }
