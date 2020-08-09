@@ -28,40 +28,39 @@ public class KanjiController {
 	@GetMapping("/kanjis/jlpt_level/{level}")
 	public List<Kanji> getKanjiByJLPTLevel(@PathVariable String level) {
 		switch(level) {
-		case "JLPT N1": 
+		case "JLPT_N1": 
 			return service.findByjlptLevelContaining(JLPTLevel.JLPT_N1);
-		case "JLPT N2":
+		case "JLPT_N2":
 			return service.findByjlptLevelContaining(JLPTLevel.JLPT_N2);
-		case "JLPT N3":
+		case "JLPT_N3":
 			return service.findByjlptLevelContaining(JLPTLevel.JLPT_N3);
-		case "JLPT N4":
+		case "JLPT_N4":
 			return service.findByjlptLevelContaining(JLPTLevel.JLPT_N4);
-		case "JLPT N5":
+		case "JLPT_N5":
 			return service.findByjlptLevelContaining(JLPTLevel.JLPT_N5);
 		default:
 			return new ArrayList<Kanji>();
 		}
-		
 	}
 	
 	@GetMapping("/kanjis/grade/{grade}")
 	public List<Kanji> getKanjiByGrade(@PathVariable String grade) {
 		switch(grade) {
-		case "Grade 1": 
+		case "Grade_1": 
 			return service.findByGradeContaining(Grade.Grade_1);
-		case "Grade 2":
+		case "Grade_2":
 			return service.findByGradeContaining(Grade.Grade_2);
-		case "Grade 3":
+		case "Grade_3":
 			return service.findByGradeContaining(Grade.Grade_3);
-		case "Grade 4":
+		case "Grade_4":
 			return service.findByGradeContaining(Grade.Grade_4);
-		case "Grade 5":
+		case "Grade_5":
 			return service.findByGradeContaining(Grade.Grade_5);
-		case "Grade 6":
+		case "Grade_6":
 			return service.findByGradeContaining(Grade.Grade_6);
-		case "Grade S":
+		case "Grade_S":
 			return service.findByGradeContaining(Grade.Grade_S);
-		case "Used in Names":
+		case "Used_In_Names":
 			return service.findByGradeContaining(Grade.USED_IN_NAMES);
 		default:
 			return new ArrayList<Kanji>();
@@ -82,6 +81,16 @@ public class KanjiController {
 	@GetMapping("/kanjis/meaning/{meaning}")
 	public List<Kanji> getKanjiByMeaning(@PathVariable String meaning) {
 		return service.findByMeaningContaining(meaning);
+	}
+	
+	@GetMapping("/kanjis/kunyomi/{kunyomi}")
+	public List<Kanji> getKanjiByKunyomi(@PathVariable String kunyomi) {
+		return service.findByKunyomiContaining(kunyomi);
+	}
+	
+	@GetMapping("/kanjis/onyomi/{onyomi}")
+	public List<Kanji> getKanjiByOnyomi(@PathVariable String onyomi) {
+		return service.findByOnyomiContaining(onyomi);
 	}
 	
 	@GetMapping("/kanjis/character/{character}")
