@@ -1,9 +1,5 @@
 package com.cognixia.jump.model;
 
-//import java.io.BufferedReader;
-//import java.io.FileInputStream;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,7 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "kanjis")
@@ -59,7 +55,7 @@ public class Kanji implements Serializable{
 	private String kunyomi;
 	@NotBlank
 	private String onyomi;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy = "kanjis", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	

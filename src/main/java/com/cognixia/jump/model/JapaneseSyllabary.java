@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "syllabaries")
@@ -53,7 +53,7 @@ public class JapaneseSyllabary implements Serializable{
 	private String strokeOrder; //the a link to a gif of the stroke order
 	@NotNull
 	private Integer numOfStrokes;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy = "syllabaries", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	

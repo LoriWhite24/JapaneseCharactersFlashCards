@@ -18,8 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity 
 @Table(name = "studylists")
 public class StudyList implements Serializable{
@@ -31,12 +29,10 @@ public class StudyList implements Serializable{
 	@NotBlank
 	@Column(unique = true)
 	private String name;
-	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "studylists_syllabaries", joinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "syllabary_id", referencedColumnName = "id", nullable = false, updatable = false)})
 	private Set<JapaneseSyllabary> syllabaries = new HashSet<JapaneseSyllabary>();
-	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "studylists_kanjis", joinColumns = {@JoinColumn(name = "studylist_id", referencedColumnName = "id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "kanji_id", referencedColumnName = "id", nullable = false, updatable = false)})
