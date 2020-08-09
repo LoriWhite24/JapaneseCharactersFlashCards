@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "kanjis")
 public class Kanji implements Serializable{
@@ -57,6 +59,7 @@ public class Kanji implements Serializable{
 	private String kunyomi;
 	@NotBlank
 	private String onyomi;
+	@JsonBackReference
 	@ManyToMany(mappedBy = "kanjis", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<StudyList> studyLists = new HashSet<StudyList>();
 	
