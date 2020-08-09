@@ -37,7 +37,7 @@ public class JapaneseSyllabary implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(name = "character_value")
+	@Column(name = "character_value", unique = true)
 	private String character;
 	@NotBlank
 	private String reading;
