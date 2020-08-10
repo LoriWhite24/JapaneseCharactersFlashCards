@@ -23,10 +23,13 @@
     </a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="navlink" style="color:white" onclick="getPage('main')">Home</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop1" data-toggle="dropdown" data-target="#syllabaryMenu" style="color:white">Japanese Syllabaries</a>
                 <div id="syllabaryMenu" class="dropdown-menu bg-dark">
-                    <a class="dropdown-item" href="#" style="color:white">Hiragana</a>
+                    <a class="dropdown-item" href="#" style="color:white" onclick="getPage('hiragana')">Hiragana</a>
                     <a class="dropdown-item" href="#" style="color:white">Katakana</a>
                     <a class="dropdown-item" href="#" style="color:white">Monographs</a>
                     <a class="dropdown-item" href="#" style="color:white">Diagraphs</a>
@@ -43,13 +46,8 @@
                     <a class="dropdown-item" href="#" style="color:white">Used in Names</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown" data-target="#listMenu" style="color:white">Study Lists</a>
-                <div id="listMenu" class="dropdown-menu bg-dark">
-                    <a class="dropdown-item" href="#" style="color:white">Add New List</a>
-                    <a class="dropdown-item" href="#" style="color:white">Update a List</a>
-                    <a class="dropdown-item" href="#" style="color:white">Delete a List</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="navlink" style="color:white" onclick="getPage('listpage')">Study Lists</a>
             </li>
         </ul>
         <form class="form-inline">
@@ -61,10 +59,10 @@
     <!-- Page Content Below -->
     <div id="page" class="container-fluid" style="padding:0">
         <div class="border-box text-center py-5" id="pagetitle" style="background-image:url(https://eskipaper.com/images/backgrounds-6.jpg);margin-top:50px;height:auto;color:whitesmoke"></div>
-        <div class="container" id="pagebody" style="margin-top:30px;margin-bottom:30px;padding-bottom:100px;"></div>
+        <div class="container px-5" id="pagebody" style="margin-top:30px;margin-bottom:30px;padding-bottom:100px;"></div>
         <div class="border-box py-5" style="background-image:url(https://eskipaper.com/images/backgrounds-6.jpg);width:100%"></div>
     </div>
-    <div id="modals"></div>
+    <div id="pages"></div>
 </body>
 
 </html>
