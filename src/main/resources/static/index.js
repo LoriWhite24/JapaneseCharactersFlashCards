@@ -13,7 +13,7 @@ function getPage(newPage) {
             getRequest("/api/studylists");
             break;
         case "hiragana":
-            pageheader = "<h1><strong>Hiragana</strong></h1>";
+            pageheader = "<h1><strong>ひらがな</strong></h1><h2>Hiragana</h2>";
             getRequest("/api/japanese_syllabaries/type/hiragana");
             break;
         case "main":
@@ -55,7 +55,7 @@ function renderRequest(data, request) {
             console.log("rendered: " + mgbody);
             break;
         case "/api/japanese_syllabaries/type/hiragana":
-            mgbody = '';
+            mgbody = '<table class="table table-borderless"><thead><tr><th>Lists</th><th></th></tr></thead><tbody>';
             for (var index = 0; index < json.length; index++) {
                 if (index % 5 == 0 && index > 0) {
                     mgbody += '</div>';
